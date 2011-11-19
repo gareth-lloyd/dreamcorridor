@@ -20,6 +20,9 @@ def get_image():
     #convert Ipl image to PIL image
     return opencv.adaptors.Ipl2PIL(im)
 
+def analyse_data(image,colour):
+    #convert the image and other inputs into a "dream"
+    r,g,b = image.convert("RGB").resize((1,1), Image.ANTIALIAS).getpixel((0,0))
 
 while(True):
     sample = Ultrasonic(b, PORT_4).get_sample()
