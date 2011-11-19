@@ -17,6 +17,8 @@ def get_image():
     im = highgui.cvQueryFrame(camera)
     #im = opencv.cvGetMat(im)
     #convert Ipl image to PIL image
+    #highgui.cvReleaseCapture(camera)
+    #camera = highgui.cvCreateCameraCapture(1)
     return opencv.adaptors.Ipl2PIL(im)
 
 
@@ -25,7 +27,9 @@ while(True):
     if (sample+threshold)<baseline:
         print "person detected at " + str(sample)+"cm"
         im = get_image()
+	highgui.cvReleaseCapture(camera)
+	camera = highgui.cvCreateCameraCapture(1)
 	print "saving photo"
-        im.save('test'+time.strftime('%H%M%S')+'.','JPEG')
+        im.save('test'+time.strftime('%H%M%S')+'.jpg','JPEG')
     	time.sleep(10)
 
