@@ -10,7 +10,7 @@ import opencv
 import Image
 
 colours = ["black","blue","green","yellow","red","white"]
-pbm_images = ["cloud","lightning","face","sun-cloud","rain","stripe","sun","test","cloud","lightning","face","sun-cloud","rain","stripe","sun","test","cloud","lightning","face","sun-cloud"]
+pbm_images = ["cloud","lightning","face","sun-cloud","rain","sun","test"]
 
 b = nxt.locator.find_one_brick()
 camera = highgui.cvCreateCameraCapture(1)#initial camera setup, presuming it is the 2nd (i.e. pos 1) camera
@@ -37,8 +37,8 @@ while(True):
         colour_sensed = Color20(b,PORT_3).get_color()
         print "LEGO Colour: "+colours[colour_sensed]
         im = get_image()
-        r,g,b = im.convert("RGB").resize((1,1), Image.ANTIALIAS).getpixel((0,0))
-        pic = r+g+b+colour_sensed #clever AI algorithm
+        r,g,bl = im.convert("RGB").resize((1,1), Image.ANTIALIAS).getpixel((0,0))
+        pic = r+g+bl+colour_sensed #clever AI algorithm
         #write to peggy
         divisor = 780 / len(pbm_images)
         print "writing image "+pbm_images[pic/divisor]+" to peggy"
